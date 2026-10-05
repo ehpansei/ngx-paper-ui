@@ -1,0 +1,14 @@
+{
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "libs/ui/src/**/*.html",
+      "options": {
+        "parser": "angular",
+        "singleAttributePerLine": true,
+        "printWidth": 120,
+        "bracketSameLine": true
+      }
+    }
+  ]
+}

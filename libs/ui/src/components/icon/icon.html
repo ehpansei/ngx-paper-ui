@@ -1,0 +1,15 @@
+<svg
+  class="ui-icon"
+  [attr.width]="px()"
+  [attr.height]="px()"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  [attr.stroke-width]="strokeWidth()"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  [attr.role]="title() ? 'img' : null"
+  [attr.aria-label]="title() || null"
+  [attr.aria-hidden]="title() ? null : 'true'">
+  <svg:use [attr.href]="href()" />
+</svg>

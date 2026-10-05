@@ -1,0 +1,15 @@
+<label
+  class="ui-switch"
+  [class.is-disabled]="disabled()">
+  <input
+    type="checkbox"
+    role="switch"
+    [checked]="checked()"
+    [disabled]="disabled() || readonly()"
+    [attr.name]="name() || null"
+    [attr.aria-label]="ariaLabel() || null"
+    (change)="checked.set($any($event.target).checked)"
+    (blur)="touched.set(true)" />
+  <span class="ui-switch-track"></span>
+  <ng-content />
+</label>

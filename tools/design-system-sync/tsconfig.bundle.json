@@ -1,0 +1,20 @@
+{
+  "extends": "../../apps/ui-demo-app/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/ds-bundle",
+    "types": []
+  },
+  "files": [
+    "../../dist/ds-sync/build/mount.ts",
+    "raw.d.ts"
+  ],
+  "include": [
+    "../../apps/ui-demo-app/src/app/pages/**/*-showcase.ts",
+    "../../apps/ui-demo-app/src/app/docs/sample-data.ts",
+    "../../libs/ui/src/**/*.ts"
+  ],
+  "exclude": [
+    "../../**/*.spec.ts",
+    "../../libs/ui/src/test-setup.ts"
+  ]
+}

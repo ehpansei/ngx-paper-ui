@@ -1,0 +1,25 @@
+<form
+  class="ui-form-fields"
+  novalidate
+  (submit)="onSubmit($event)">
+  @for (c of formConfig(); track c.key) {
+    @if (c.controlType === 'input') {
+      <lib-text-input
+        block
+        [label]="c.label"
+        [placeholder]="c.placeholder ?? ''"
+        [helper]="c.helper"
+        [type]="c.type ?? 'text'"
+        [formField]="$any(field(c.key))" />
+    } @else {
+      <lib-select
+        block
+        [label]="c.label"
+        [placeholder]="c.placeholder ?? 'Select…'"
+        [helper]="c.helper"
+        [options]="c.options"
+        [formField]="$any(field(c.key))" />
+    }
+  }
+  <ng-content />
+</form>

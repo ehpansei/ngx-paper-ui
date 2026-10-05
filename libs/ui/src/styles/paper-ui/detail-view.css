@@ -1,0 +1,14 @@
+/* ---- DetailView ---- */
+.ui-detail { display: flex; flex-direction: column; gap: var(--space-6); box-sizing: border-box; padding: var(--space-6); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.ui-detail-head { display: flex; align-items: center; gap: var(--space-3); }
+.ui-detail-head .ui-item-icon { width: 48px; height: 48px; font-size: var(--text-lg); }
+.ui-detail-title { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ui-detail-title h2, .ui-detail-title a, .ui-detail-sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-detail-title h2 { margin: 0; font-size: var(--text-xl); line-height: var(--leading-xl); font-weight: var(--font-weight-semibold); }
+.ui-detail-title a { font-size: var(--text-xs-plus); line-height: var(--leading-xs-plus); color: var(--primary-text); text-decoration: none; }
+.ui-detail-title a:hover { text-decoration: underline; }
+.ui-detail-sub { font-size: var(--text-xs-plus); line-height: var(--leading-xs-plus); color: var(--on-surface-muted); }
+.ui-detail-fields { display: flex; flex-direction: column; gap: var(--space-4); }
+.ui-detail-badges { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.ui-detail-foot { display: flex; gap: var(--space-2); align-items: center; justify-content: space-between; padding-top: var(--space-4); border-top: 1px solid var(--border); }
+.ui-detail-meta { font-size: var(--text-xs); line-height: var(--leading-xs); color: var(--on-surface-muted); }

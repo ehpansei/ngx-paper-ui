@@ -1,0 +1,36 @@
+name: Release
+
+# Tags come from `nx release` (pattern v{version}); this publishes that version to npm.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+      - run: npx nx build ui
+
+      - name: Check the tag matches the package version
+        run: |
+          version=$(node -p "require('./dist/libs/ui/package.json').version")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME ≠ package v$version"; exit 1; }
+
+      - run: npx publint dist/libs/ui
+
+      - run: npm publish dist/libs/ui --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

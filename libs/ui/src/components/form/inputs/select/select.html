@@ -1,0 +1,68 @@
+@if (label()) {
+  <label
+    class="ui-label"
+    [for]="id"
+    >{{ label() }}</label
+  >
+}
+<div
+  class="ui-select"
+  [class.is-open]="open()">
+  <button
+    type="button"
+    class="ui-control ui-select-trigger"
+    [id]="id"
+    [disabled]="disabled() || readonly()"
+    [class.is-focus]="open()"
+    [class.is-error]="!!message()"
+    [class.is-disabled]="disabled()"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="open()"
+    (click)="toggle()"
+    (keydown)="onKey($event)"
+    (blur)="touched.set(true)">
+    <span
+      class="ui-select-value"
+      [class.is-placeholder]="!current()"
+      >{{ current()?.label ?? placeholder() }}</span
+    >
+    <lib-icon
+      name="chevron-down"
+      size="sm"
+      class="ui-chevron" />
+  </button>
+  @if (open()) {
+    <ul
+      class="ui-menu"
+      role="listbox"
+      [attr.aria-labelledby]="id">
+      @for (o of options(); track o.value; let i = $index) {
+        <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- the trigger owns keyboard navigation (listbox pattern) -->
+        <li
+          role="option"
+          class="ui-menu-item"
+          [class.is-active]="i === activeIndex()"
+          [attr.aria-selected]="o.value === value()"
+          [attr.aria-disabled]="o.disabled || null"
+          (click)="pick(o)"
+          (mouseenter)="activeIndex.set(i)">
+          {{ o.label }}
+          @if (o.value === value()) {
+            <lib-icon
+              name="check"
+              size="sm" />
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>
+@if (message(); as m) {
+  <div class="ui-helper is-error">
+    <lib-icon
+      name="alert"
+      [size]="14" />{{ m }}
+  </div>
+} @else if (helper()) {
+  <div class="ui-helper">{{ helper() }}</div>
+}

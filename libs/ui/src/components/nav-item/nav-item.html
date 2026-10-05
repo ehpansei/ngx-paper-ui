@@ -1,0 +1,7 @@
+@if (icon(); as i) {
+  <lib-icon [name]="i" />
+}
+<span class="ui-nav-label"><ng-content /></span>
+@if (count() !== null) {
+  <span class="ui-nav-count">{{ count() }}</span>
+}

@@ -1,0 +1,11 @@
+@if (icon(); as i) {
+  <lib-icon
+    [name]="i"
+    [size]="size()" />
+}
+<ng-content />
+@if (iconRight(); as i) {
+  <lib-icon
+    [name]="i"
+    [size]="size()" />
+}

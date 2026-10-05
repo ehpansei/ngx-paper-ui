@@ -1,0 +1,9 @@
+<lib-confirm-dialog
+  [title]="d.title"
+  [description]="d.description"
+  [confirmLabel]="d.confirmLabel ?? 'Delete'"
+  [cancelLabel]="d.cancelLabel ?? 'Cancel'"
+  [tone]="d.tone ?? 'danger'"
+  [icon]="d.icon === undefined ? 'trash' : d.icon"
+  (confirm)="ref.close(true)"
+  (cancel)="ref.close(false)" />

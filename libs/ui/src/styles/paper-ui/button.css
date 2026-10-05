@@ -1,0 +1,21 @@
+/* ---- Button ---- */
+a.ui-btn { text-decoration: none; }
+.ui-btn { font: inherit; display: inline-flex; align-items: center; justify-content: center; gap: var(--button-primary-gap); height: var(--button-primary-height); padding: 0 var(--button-primary-padding); border-radius: var(--button-primary-radius); border: 1px solid transparent; font-size: var(--text-sm); line-height: var(--leading-sm); font-weight: var(--font-weight-medium); cursor: pointer; white-space: nowrap; transition: background-color .12s, border-color .12s, box-shadow .12s; }
+.ui-btn-sm { height: var(--button-height-sm); padding: 0 var(--space-3); gap: 6px; font-size: var(--text-xs); line-height: var(--leading-xs); }
+.ui-btn-lg { height: var(--button-height-lg); padding: 0 var(--space-6); font-size: var(--text-base); line-height: var(--leading-base); }
+.ui-btn-icon-only { padding: 0; width: var(--button-primary-height); }
+.ui-btn-sm.ui-btn-icon-only { width: var(--button-height-sm); }
+.ui-btn-lg.ui-btn-icon-only { width: var(--button-height-lg); }
+.ui-btn-primary { background: var(--button-primary-bg); color: var(--button-primary-color); border-color: var(--button-primary-border); box-shadow: var(--shadow-sm); }
+.ui-btn-primary:hover, .ui-btn-primary.is-hover { background: var(--button-primary-bg-hover); box-shadow: var(--shadow-md); }
+.ui-btn-secondary { background: var(--button-secondary-bg); color: var(--button-secondary-color); border-color: var(--button-secondary-border); }
+.ui-btn-secondary:hover, .ui-btn-secondary.is-hover { background: var(--button-secondary-bg-hover); border-color: var(--button-secondary-bg-hover); }
+.ui-btn-danger { background: var(--danger); color: var(--on-danger); box-shadow: var(--shadow-sm); }
+.ui-btn-danger:hover, .ui-btn-danger.is-hover { background: var(--danger-hover); box-shadow: var(--shadow-md); }
+.ui-btn-ghost { background: transparent; color: var(--on-surface); }
+.ui-btn-ghost:hover, .ui-btn-ghost.is-hover { background: var(--surface-hover); }
+.ui-btn:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; box-shadow: none; }
+.ui-btn-primary:disabled:hover { background: var(--button-primary-bg); }
+.ui-btn-secondary:disabled:hover { background: var(--button-secondary-bg); border-color: var(--button-secondary-border); }
+.ui-btn-danger:disabled:hover { background: var(--danger); }
+.ui-btn-ghost:disabled:hover { background: transparent; }

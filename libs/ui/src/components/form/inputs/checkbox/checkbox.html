@@ -1,0 +1,26 @@
+<label
+  class="ui-check"
+  [class.is-disabled]="disabled()">
+  <input
+    type="checkbox"
+    [checked]="checked()"
+    [indeterminate]="indeterminate()"
+    [disabled]="disabled() || readonly()"
+    [attr.name]="name() || null"
+    (change)="checked.set($any($event.target).checked)"
+    (blur)="touched.set(true)" />
+  <span class="ui-check-box"
+    ><lib-icon
+      [name]="indeterminate() ? 'minus' : 'check'"
+      [size]="14"
+      [strokeWidth]="2.5"
+  /></span>
+  <ng-content />
+</label>
+@if (message(); as m) {
+  <div class="ui-helper is-error">
+    <lib-icon
+      name="alert"
+      [size]="14" />{{ m }}
+  </div>
+}

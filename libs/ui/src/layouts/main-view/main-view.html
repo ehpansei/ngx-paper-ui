@@ -1,0 +1,65 @@
+<div class="ui-app-frame">
+  <header class="ui-app-header">
+    <button
+      type="button"
+      class="ui-btn ui-btn-ghost ui-btn-icon-only"
+      [attr.aria-expanded]="sidebarOpen()"
+      [attr.aria-controls]="navId"
+      [attr.aria-label]="sidebarOpen() ? 'Close navigation' : 'Open navigation'"
+      (click)="sidebarOpen.set(!sidebarOpen())">
+      <lib-icon name="menu" />
+    </button>
+    <div class="ui-app-brand">
+      <ng-content select="[libMainBrand]"><lib-logo [name]="brandName()" /></ng-content>
+    </div>
+    <ng-content select="[libMainUser]">
+      @if (userName(); as u) {
+        <lib-avatar [name]="u" />
+      }
+    </ng-content>
+  </header>
+  <div class="ui-app-body">
+    @if (sidebarOpen()) {
+      <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- pointer dismiss; Escape is handled on the host -->
+      <div
+        class="ui-app-scrim"
+        (click)="sidebarOpen.set(false)"></div>
+    }
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events, @angular-eslint/template/interactive-supports-focus -- delegated: closes the drawer after a nav item (itself focusable) is activated -->
+    <div
+      class="ui-app-nav"
+      [id]="navId"
+      (click)="onNavClick($event)">
+      <button
+        type="button"
+        class="ui-field-btn ui-app-nav-close"
+        aria-label="Close navigation"
+        (click)="sidebarOpen.set(false)">
+        <lib-icon
+          name="x"
+          size="sm" />
+      </button>
+      <ng-content select="[libMainSidebar]" />
+    </div>
+    <main class="ui-pane">
+      <div class="ui-pane-head">
+        <h1 class="ui-pane-title">{{ title() }}</h1>
+        <ng-content select="[libMainActions]" />
+      </div>
+      <ng-content />
+    </main>
+    <aside
+      class="ui-aside"
+      [attr.aria-label]="detailLabel()">
+      <button
+        type="button"
+        class="ui-btn ui-btn-ghost ui-btn-sm ui-aside-back"
+        (click)="detailOpen.set(false)">
+        <lib-icon
+          name="arrow-left"
+          size="sm" />{{ backLabel() }}
+      </button>
+      <ng-content select="[libMainDetail]" />
+    </aside>
+  </div>
+</div>

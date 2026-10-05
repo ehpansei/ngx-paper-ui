@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # nx affected compares against main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - run: npx nx affected -t lint test build
+      # nx test doesn't print the sync tool's results; run them visibly.
+      - run: npx vitest run --config tools/design-system-sync/vitest.config.mts
+      - run: npx nx e2e ui-demo-app-e2e -- --project=chromium
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: dist/.playwright/apps/ui-demo-app-e2e
+          retention-days: 7

@@ -1,0 +1,56 @@
+/* ---- Field (TextInput, Select, PasswordField) ---- */
+.ui-field { display: flex; flex-direction: column; gap: 6px; width: var(--input-width); max-width: 100%; min-width: 0; box-sizing: border-box; }
+.ui-field.is-block { width: 100%; }
+.ui-label { font-size: var(--text-xs-plus); line-height: var(--leading-xs-plus); font-weight: var(--font-weight-medium); color: var(--on-surface); }
+.ui-control { position: relative; display: flex; align-items: center; gap: var(--space-2); height: var(--input-height); box-sizing: border-box; padding: 0 var(--space-3); background: var(--input-bg); border: 1px solid var(--input-border); border-radius: var(--radius-md); color: var(--on-surface); transition: border-color .12s, box-shadow .12s; }
+.ui-control:hover, .ui-control.is-hover { border-color: var(--input-border-hover); }
+.ui-control:focus-within, .ui-control.is-focus { border-color: var(--input-border-hover); box-shadow: var(--shadow-focus); }
+.ui-control.is-error { border-color: var(--danger); }
+.ui-control.is-disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+.ui-control.is-disabled:hover { border-color: var(--input-border); }
+.ui-control > .ui-icon { color: var(--on-surface-muted); }
+.ui-input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; font: inherit; font-size: var(--text-sm); line-height: var(--leading-sm); color: var(--on-surface); padding: 0; }
+.ui-input::placeholder { color: var(--on-surface-muted); opacity: 1; }
+.ui-input:disabled { cursor: not-allowed; }
+.ui-helper { margin-top: -2px; font-size: var(--text-xs); line-height: var(--leading-xs); color: var(--on-surface-muted); }
+.ui-helper.is-error { color: var(--danger-text); display: flex; gap: var(--space-1); align-items: center; }
+.ui-field-btn { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; margin-right: -6px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--on-surface-muted); cursor: pointer; }
+.ui-field-btn:hover { background: var(--surface-hover); color: var(--on-surface); }
+
+/* ---- Select ---- */
+.ui-select { position: relative; }
+.ui-select-trigger { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+.ui-select-trigger .ui-select-value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--text-sm); }
+.ui-select-trigger .ui-select-value.is-placeholder { color: var(--on-surface-muted); }
+.ui-select-trigger .ui-chevron { color: var(--on-surface-muted); transition: transform .12s; }
+.ui-select.is-open .ui-chevron { transform: rotate(180deg); }
+.ui-menu { position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + var(--space-1)); margin: 0; padding: var(--space-1); list-style: none; display: flex; flex-direction: column; gap: 2px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
+.ui-select.is-static .ui-menu { position: static; margin-top: var(--space-1); }
+.ui-menu-item { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); height: var(--menu-item-height); padding: 0 var(--space-2); border-radius: var(--radius-sm); font-size: var(--text-sm); color: var(--on-surface); cursor: pointer; }
+.ui-menu-item:hover, .ui-menu-item.is-active { background: var(--surface-hover); }
+.ui-menu-item .ui-icon { color: var(--primary-text); }
+
+
+/* ---- Checkbox ---- */
+.ui-check { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); line-height: var(--leading-sm); color: var(--on-surface); cursor: pointer; }
+.ui-check input, .ui-switch input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.ui-check-box { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid var(--border-hover); border-radius: 5px; background: var(--surface); color: var(--on-primary); transition: background-color .12s, border-color .12s; }
+.ui-check-box .ui-icon { opacity: 0; }
+.ui-check:hover .ui-check-box { border-color: var(--on-surface-muted); }
+.ui-check input:checked + .ui-check-box, .ui-check input:indeterminate + .ui-check-box { background: var(--primary); border-color: var(--primary); }
+.ui-check input:checked + .ui-check-box .ui-icon, .ui-check input:indeterminate + .ui-check-box .ui-icon { opacity: 1; }
+.ui-check:hover input:checked + .ui-check-box { background: var(--primary-hover); border-color: var(--primary-hover); }
+.ui-check.is-disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+
+/* ---- Switch ---- */
+.ui-switch { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); line-height: var(--leading-sm); color: var(--on-surface); cursor: pointer; }
+.ui-switch-track { position: relative; flex: none; width: 36px; height: 20px; border-radius: var(--radius-full); background: var(--secondary-hover); transition: background-color .15s; }
+.ui-switch-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: var(--radius-full); background: var(--surface); box-shadow: var(--shadow-sm); transition: transform .15s; }
+.ui-switch input:checked + .ui-switch-track { background: var(--primary); }
+.ui-switch input:checked + .ui-switch-track::after { transform: translateX(16px); background: var(--on-primary); }
+.ui-switch:hover input:checked + .ui-switch-track { background: var(--primary-hover); }
+.ui-switch.is-disabled { opacity: var(--disabled-opacity); cursor: not-allowed; }
+[data-theme="dark"] .ui-switch-track::after { background: var(--on-surface-muted); }
+
+/* ---- Form (config-driven) ---- */
+.ui-form, .ui-form-fields { display: flex; flex-direction: column; gap: var(--space-4); }

@@ -1,0 +1,91 @@
+{
+  "name": "ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "project": "libs/ui/ng-package.json",
+        "tsConfig": "libs/ui/tsconfig.lib.prod.json"
+      },
+      "dependsOn": [
+        "tokens",
+        "icons",
+        "styles"
+      ]
+    },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "reportsDirectory": "coverage/libs/ui"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "icons": {
+      "executor": "nx:run-commands",
+      "inputs": [
+        "{projectRoot}/src/assets/icons/*.svg",
+        "{projectRoot}/scripts/build-icons.mjs"
+      ],
+      "outputs": [
+        "{projectRoot}/src/assets/icons.svg",
+        "{projectRoot}/src/components/icon/icon-names.ts",
+        "{projectRoot}/src/components/icon/icon-sprite-data.ts"
+      ],
+      "options": {
+        "command": "node libs/ui/scripts/build-icons.mjs"
+      }
+    },
+    "tokens": {
+      "executor": "nx:run-commands",
+      "inputs": [
+        "{projectRoot}/src/styles/tokens/tokens.json",
+        "{projectRoot}/scripts/build-tokens.mjs"
+      ],
+      "outputs": [
+        "{projectRoot}/src/styles/tokens/tokens.css",
+        "{workspaceRoot}/apps/ui-demo-app/src/app/docs/tokens.json"
+      ],
+      "options": {
+        "command": "node libs/ui/scripts/build-tokens.mjs"
+      }
+    },
+    "styles": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "tokens"
+      ],
+      "inputs": [
+        "{projectRoot}/src/styles/index.css",
+        "{projectRoot}/src/styles/paper-ui/*.css",
+        "{projectRoot}/src/styles/tokens/tokens.json",
+        "{projectRoot}/scripts/build-styles.mjs",
+        "{projectRoot}/scripts/css-parts.mjs",
+        "{projectRoot}/scripts/build-tokens.mjs"
+      ],
+      "outputs": [
+        "{projectRoot}/src/styles/package/paper-ui.css"
+      ],
+      "options": {
+        "command": "node libs/ui/scripts/build-styles.mjs"
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<span class="ui-empty-icon"
+  ><lib-icon
+    [name]="icon()"
+    [size]="22"
+/></span>
+<h3 class="ui-empty-title">{{ title() }}</h3>
+@if (description()) {
+  <p class="ui-empty-text">{{ description() }}</p>
+}
+<ng-content />

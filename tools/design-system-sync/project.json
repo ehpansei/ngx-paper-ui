@@ -1,0 +1,49 @@
+{
+  "name": "design-system-sync",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "tools/design-system-sync",
+  "tags": [
+    "type:tool"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "reportsDirectory": "../../coverage/tools/design-system-sync"
+      }
+    },
+    "stage": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        {
+          "projects": [
+            "ui"
+          ],
+          "target": "tokens"
+        },
+        {
+          "projects": [
+            "ui"
+          ],
+          "target": "icons"
+        }
+      ],
+      "options": {
+        "command": "node tools/design-system-sync/cli.mjs stage"
+      }
+    },
+    "check": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "stage"
+      ],
+      "options": {
+        "command": "node tools/design-system-sync/cli.mjs check"
+      }
+    }
+  }
+}

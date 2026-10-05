@@ -1,0 +1,17 @@
+/* ---- InfoCard ---- */
+.ui-card { font: inherit; display: flex; align-items: center; gap: var(--space-6); width: 100%; height: var(--card-height); box-sizing: border-box; padding: 0 var(--space-4); background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-lg); color: var(--on-surface); text-align: left; cursor: pointer; transition: background-color .12s, border-color .12s; }
+.ui-card:hover, .ui-card.is-hover { background: var(--card-bg-hover); border-color: var(--card-border-hover); }
+.ui-card.is-selected { background: var(--card-bg-selected); border-color: var(--card-border-selected); }
+.ui-card-main { display: flex; align-items: center; gap: var(--space-3); flex: 1; min-width: 0; }
+.ui-item-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: var(--item-icon-size); height: var(--item-icon-size); border-radius: var(--radius-md); background: var(--surface-hover); color: var(--on-surface); font-size: var(--text-sm); font-weight: var(--font-weight-semibold); }
+.ui-card.is-selected .ui-item-icon { background: var(--surface); }
+.ui-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.ui-card-name { font-size: var(--text-sm); line-height: var(--leading-sm); font-weight: var(--font-weight-semibold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-card-account { font-size: var(--text-xs-plus); line-height: var(--leading-xs-plus); font-weight: var(--font-weight-medium); color: var(--on-surface-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ui-card-badges { display: flex; gap: var(--space-2); flex: none; }
+
+/* ---- EmptyState ---- */
+.ui-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-2); padding: var(--space-8); }
+.ui-empty-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-bottom: var(--space-2); border-radius: var(--radius-lg); background: var(--surface-hover); color: var(--on-surface-muted); }
+.ui-empty-title { margin: 0; font-size: var(--text-base); line-height: var(--leading-base); font-weight: var(--font-weight-semibold); color: var(--on-surface); }
+.ui-empty-text { margin: 0 0 var(--space-3); max-width: 320px; font-size: var(--text-sm); line-height: var(--leading-sm); color: var(--on-surface-muted); }

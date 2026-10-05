@@ -1,0 +1,41 @@
+<ng-template #body>
+  @if (collapsible() && title()) {
+    <button
+      type="button"
+      class="ui-overline ui-nav-section-toggle"
+      [attr.aria-expanded]="expanded()"
+      [attr.aria-controls]="itemsId"
+      (click)="toggle()">
+      <span>{{ title() }}</span>
+      <lib-icon
+        name="chevron-down"
+        size="sm" />
+    </button>
+  } @else if (title()) {
+    <div class="ui-overline">{{ title() }}</div>
+  }
+  <div
+    class="ui-nav-section-items"
+    [id]="itemsId"
+    [hidden]="collapsible() && !expanded()">
+    <ng-content />
+  </div>
+</ng-template>
+@if (nested) {
+  <div
+    class="ui-nav-section is-nested"
+    role="group"
+    [class.is-collapsible]="collapsible()"
+    [class.is-collapsed]="collapsible() && !expanded()"
+    [attr.aria-label]="title() || null">
+    <ng-container *ngTemplateOutlet="body" />
+  </div>
+} @else {
+  <nav
+    class="ui-nav-section"
+    [class.is-collapsible]="collapsible()"
+    [class.is-collapsed]="collapsible() && !expanded()"
+    [attr.aria-label]="title() || null">
+    <ng-container *ngTemplateOutlet="body" />
+  </nav>
+}

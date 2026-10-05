@@ -1,0 +1,10 @@
+<lib-avatar
+  [name]="name()"
+  [tone]="tone()" />
+<div class="ui-user-text">
+  <span class="ui-user-name">{{ name() }}</span>
+  @if (email()) {
+    <span class="ui-user-email">{{ email() }}</span>
+  }
+</div>
+<ng-content />

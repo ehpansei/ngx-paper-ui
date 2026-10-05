@@ -1,0 +1,25 @@
+<span class="ui-card-main">
+  <ng-content select="[libLeading]">
+    <span
+      class="ui-item-icon"
+      aria-hidden="true">
+      @if (icon(); as i) {
+        <lib-icon [name]="i" />
+      } @else {
+        {{ initial() }}
+      }
+    </span>
+  </ng-content>
+  <span class="ui-card-text">
+    <span class="ui-card-name">{{ title() }}</span>
+    @if (description()) {
+      <span class="ui-card-account">{{ description() }}</span>
+    }
+  </span>
+</span>
+<span class="ui-card-badges">
+  @for (b of badges(); track b.label) {
+    <lib-badge [tone]="b.tone">{{ b.label }}</lib-badge>
+  }
+  <ng-content select="[libTrailing]" />
+</span>

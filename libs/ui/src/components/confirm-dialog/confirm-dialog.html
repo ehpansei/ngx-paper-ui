@@ -1,0 +1,22 @@
+<lib-modal
+  role="alertdialog"
+  [title]="title()"
+  [description]="description()"
+  [icon]="icon() ?? undefined"
+  [iconTone]="tone() === 'neutral' ? 'neutral' : 'danger'"
+  (closed)="cancel.emit()">
+  <ng-container libModalFooter>
+    <button
+      libButton
+      variant="secondary"
+      (click)="cancel.emit()">
+      {{ cancelLabel() }}
+    </button>
+    <button
+      libButton
+      [variant]="tone() === 'neutral' ? 'primary' : 'danger'"
+      (click)="confirm.emit()">
+      {{ confirmLabel() }}
+    </button>
+  </ng-container>
+</lib-modal>

@@ -1,0 +1,14 @@
+<lib-icon [name]="icon()" />
+<span class="ui-toast-text"><ng-content /></span>
+<ng-content select="[libToastAction]" />
+@if (dismissible()) {
+  <button
+    type="button"
+    class="ui-field-btn"
+    aria-label="Dismiss"
+    (click)="dismissed.emit()">
+    <lib-icon
+      name="x"
+      size="sm" />
+  </button>
+}

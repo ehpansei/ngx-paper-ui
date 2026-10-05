@@ -1,0 +1,49 @@
+@if (label()) {
+  <label
+    class="ui-label"
+    [for]="id"
+    >{{ label() }}
+    @if (required()) {
+      <span aria-hidden="true"> *</span>
+    }
+  </label>
+}
+<div
+  class="ui-control"
+  [class.is-error]="!!message()"
+  [class.is-disabled]="disabled()">
+  @if (leadingIcon(); as i) {
+    <lib-icon [name]="i" />
+  }
+  <input
+    class="ui-input"
+    [id]="id"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [readOnly]="readonly()"
+    [attr.name]="name() || null"
+    [attr.autocomplete]="autocomplete()"
+    [disabled]="disabled()"
+    [value]="value()"
+    [attr.aria-invalid]="message() ? true : null"
+    [attr.aria-required]="required() || null"
+    [attr.aria-describedby]="message() || helper() ? id + '-msg' : null"
+    (input)="value.set($any($event.target).value)"
+    (blur)="touched.set(true)" />
+  <ng-content select="[libTrailing]" />
+</div>
+@if (message(); as m) {
+  <div
+    class="ui-helper is-error"
+    [id]="id + '-msg'">
+    <lib-icon
+      name="alert"
+      [size]="14" />{{ m }}
+  </div>
+} @else if (helper()) {
+  <div
+    class="ui-helper"
+    [id]="id + '-msg'">
+    {{ helper() }}
+  </div>
+}

@@ -1,0 +1,24 @@
+@for (t of items(); track t.value) {
+  <button
+    type="button"
+    role="tab"
+    class="ui-tab"
+    [class.is-active]="t.value === current()"
+    [attr.aria-selected]="t.value === current()"
+    [tabIndex]="t.value === current() ? 0 : -1"
+    (click)="value.set(t.value)">
+    @if (t.icon) {
+      <lib-icon
+        [name]="t.icon"
+        size="sm" />
+    }
+    {{ t.label }}
+    @if (t.count !== undefined) {
+      <lib-badge
+        [tone]="t.value === current() ? 'primary' : 'neutral'"
+        [icon]="null"
+        >{{ t.count }}</lib-badge
+      >
+    }
+  </button>
+}

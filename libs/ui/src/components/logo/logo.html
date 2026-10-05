@@ -1,0 +1,15 @@
+<span
+  class="ui-logo-mark"
+  aria-hidden="true">
+  @if (icon(); as i) {
+    <lib-icon
+      [name]="i"
+      size="sm"
+      [strokeWidth]="2" />
+  } @else {
+    <span style="font-weight: 700; font-size: 14px">{{ initial() }}</span>
+  }
+</span>
+@if (!markOnly()) {
+  <span class="ui-logo-word">{{ name() }}</span>
+}

@@ -1,0 +1,35 @@
+<div class="ui-modal-head">
+  @if (icon(); as i) {
+    <span
+      class="ui-modal-icon"
+      [class]="'is-' + iconTone()"
+      ><lib-icon
+        [name]="i"
+        size="lg"
+    /></span>
+  }
+  <div class="ui-modal-titles">
+    <h2
+      class="ui-modal-title"
+      [id]="titleId">
+      {{ title() }}
+    </h2>
+    @if (description()) {
+      <p class="ui-modal-desc">{{ description() }}</p>
+    }
+  </div>
+  @if (closable()) {
+    <button
+      libButton
+      variant="ghost"
+      size="sm"
+      icon="x"
+      iconOnly
+      label="Close"
+      (click)="closed.emit()"></button>
+  }
+</div>
+<ng-content />
+<div class="ui-modal-foot">
+  <ng-content select="[libModalFooter]" />
+</div>

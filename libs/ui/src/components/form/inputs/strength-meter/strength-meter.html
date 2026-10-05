@@ -1,0 +1,17 @@
+<div class="ui-strength-bar">
+  @for (i of [1, 2, 3, 4]; track i) {
+    <span
+      class="ui-strength-seg"
+      [class.is-on]="i <= level()"></span>
+  }
+</div>
+@if (!hideLabel()) {
+  <div class="ui-strength-label">
+    <span
+      >Strength: <strong>{{ labels[level()] }}</strong></span
+    >
+    @if (hint()) {
+      <span>{{ hint() }}</span>
+    }
+  </div>
+}

@@ -1,0 +1,15 @@
+import {
+  Avatar, Badge, Button, Checkbox, ConfirmDialog, DetailView, EmptyState, Form, Icon, InfoCard, Link, Logo, Modal,
+  NavItem, NavSection, PasswordField, Progress, Select, Sidebar, SidebarUser, StrengthMeter, Switch, Tabs, TextInput,
+  Toast, Toaster,
+} from './components';
+import { MainView } from './layouts';
+import { Theme } from './theme';
+
+/** Every Paper UI component and directive, for `imports: [PAPER_UI]`. */
+export const PAPER_UI = [
+  Icon, Button, TextInput, Select, PasswordField, StrengthMeter, Checkbox, Switch,
+  Tabs, Progress, Link, Badge, Avatar, EmptyState,
+  Logo, Sidebar, NavSection, NavItem, SidebarUser, MainView,
+  InfoCard, DetailView, Modal, ConfirmDialog, Toast, Toaster, Theme, Form,
+] as const;

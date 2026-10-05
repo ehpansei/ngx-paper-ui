@@ -1,0 +1,97 @@
+<div class="ui-detail-head">
+  <ng-content select="[libLeading]">
+    <span
+      class="ui-item-icon"
+      aria-hidden="true">
+      @if (icon(); as i) {
+        <lib-icon [name]="i" />
+      } @else {
+        {{ title().charAt(0).toUpperCase() }}
+      }
+    </span>
+  </ng-content>
+  <div class="ui-detail-title">
+    <h2>{{ title() }}</h2>
+    @if (href()) {
+      <a
+        [href]="href()"
+        target="_blank"
+        rel="noreferrer"
+        >{{ subtitle() || displayHref() }}</a
+      >
+    } @else if (subtitle()) {
+      <span class="ui-detail-sub">{{ subtitle() }}</span>
+    }
+  </div>
+  @if (editable()) {
+    <button
+      libButton
+      variant="secondary"
+      size="sm"
+      (click)="edit.emit()">
+      Edit
+    </button>
+  }
+</div>
+@if (badges().length) {
+  <div class="ui-detail-badges">
+    @for (b of badges(); track b.label) {
+      <lib-badge [tone]="b.tone">{{ b.label }}</lib-badge>
+    }
+  </div>
+}
+<div class="ui-detail-fields">
+  @for (f of fields(); track f.label) {
+    <lib-text-input
+      [label]="f.label"
+      [value]="f.value"
+      readonly
+      block>
+      @if (f.copyable !== false) {
+        <button
+          libTrailing
+          type="button"
+          class="ui-field-btn"
+          [attr.aria-label]="'Copy ' + f.label.toLowerCase()"
+          (click)="copy(f.label, f.value)">
+          <lib-icon
+            name="copy"
+            size="sm" />
+        </button>
+      }
+    </lib-text-input>
+  }
+  @if (password() !== null) {
+    <div>
+      <lib-password-field
+        [label]="passwordLabel()"
+        [value]="password() ?? ''"
+        readonly
+        block
+        (copied)="copied.emit(passwordLabel())" />
+      @if (showStrength()) {
+        <lib-strength-meter
+          style="margin-top: 10px"
+          [score]="strength()"
+          [password]="password()"
+          [hint]="strengthHint()" />
+      }
+    </div>
+  }
+  <ng-content />
+</div>
+@if (meta() || deletable()) {
+  <div class="ui-detail-foot">
+    <span class="ui-detail-meta">{{ meta() }}</span>
+    @if (deletable()) {
+      <button
+        libButton
+        variant="ghost"
+        size="sm"
+        icon="trash"
+        (click)="delete.emit()">
+        Delete
+      </button>
+    }
+  </div>
+}

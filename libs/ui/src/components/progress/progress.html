@@ -1,0 +1,19 @@
+@if (label() || showValue()) {
+  <div class="ui-progress-head">
+    <strong>{{ label() }}</strong>
+    @if (showValue()) {
+      <span>{{ pct() }}%</span>
+    }
+  </div>
+}
+<div
+  class="ui-progress-track"
+  role="progressbar"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  [attr.aria-valuenow]="pct()"
+  [attr.aria-label]="label()">
+  <div
+    class="ui-progress-fill"
+    [style.width.%]="pct()"></div>
+</div>

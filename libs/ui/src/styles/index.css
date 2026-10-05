@@ -1,0 +1,22 @@
+/*
+ * Paper UI — the library's global stylesheet. Components carry no styles of their own:
+ * everything lives here, in `ui-*` classes that read the tokens.
+ *
+ * The in-repo entry (the docs app imports it). build-styles.mjs joins the same parts, in this order, into the
+ * published package/paper-ui.css.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@import "./tokens/tokens.css";
+
+@import "./paper-ui/base.css";
+@import "./paper-ui/button.css";
+@import "./paper-ui/fields.css";
+@import "./paper-ui/display.css";
+@import "./paper-ui/navigation.css";
+@import "./paper-ui/cards.css";
+@import "./paper-ui/overlays.css";
+@import "./paper-ui/main-view.css";
+@import "./paper-ui/password-strength.css";
+@import "./paper-ui/detail-view.css";
+@import "./paper-ui/cdk.css";

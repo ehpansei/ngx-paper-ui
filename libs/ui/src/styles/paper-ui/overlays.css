@@ -1,0 +1,18 @@
+/* ---- Toast ---- */
+.ui-toast { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; box-sizing: border-box; padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); border-radius: var(--radius-lg); background: var(--on-surface); color: var(--surface); box-shadow: var(--shadow-md); font-size: var(--text-sm); line-height: var(--leading-sm); font-weight: var(--font-weight-medium); }
+.ui-toast-text { flex: 1; }
+.ui-toast .ui-field-btn { color: inherit; opacity: .75; margin: 0; }
+.ui-toast .ui-field-btn:hover { background: transparent; opacity: 1; }
+
+/* ---- Modal ---- */
+.ui-scrim { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: var(--space-6); background: var(--scrim); }
+.ui-scrim.is-inline { position: relative; inset: auto; min-height: 100%; box-sizing: border-box; }
+.ui-modal { display: flex; flex-direction: column; gap: var(--space-5); width: 100%; max-width: 440px; box-sizing: border-box; padding: var(--space-6); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); color: var(--on-surface); }
+.ui-modal-head { display: flex; gap: var(--space-4); align-items: flex-start; }
+.ui-modal-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--surface-hover); color: var(--on-surface-muted); }
+.ui-modal-icon.is-danger { background: var(--danger-soft); color: var(--danger-text); }
+.ui-modal-icon.is-primary { background: var(--primary-soft); color: var(--primary-text); }
+.ui-modal-titles { flex: 1; display: flex; flex-direction: column; gap: var(--space-1); }
+.ui-modal-title { margin: 0; font-size: var(--text-xl); line-height: var(--leading-xl); font-weight: var(--font-weight-semibold); }
+.ui-modal-desc { margin: 0; font-size: var(--text-sm); line-height: var(--leading-sm); color: var(--on-surface-muted); }
+.ui-modal-foot { display: flex; justify-content: flex-end; gap: var(--space-2); }

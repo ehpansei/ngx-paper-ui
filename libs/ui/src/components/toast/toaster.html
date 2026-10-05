@@ -1,0 +1,20 @@
+@for (t of toasts.items(); track t.id) {
+  <lib-toast
+    style="pointer-events: auto"
+    [icon]="t.icon ?? 'check'"
+    [dismissible]="!t.action"
+    (dismissed)="toasts.dismiss(t.id)">
+    {{ t.message }}
+    @if (t.action) {
+      <button
+        libToastAction
+        libButton
+        variant="ghost"
+        size="sm"
+        style="color: inherit"
+        (click)="t.action!(); toasts.dismiss(t.id)">
+        {{ t.actionLabel ?? 'Undo' }}
+      </button>
+    }
+  </lib-toast>
+}

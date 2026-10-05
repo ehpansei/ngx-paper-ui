@@ -1,0 +1,71 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# LLM artifacts (root folders only — nested docs/ folders are source)
+/docs
+/plans
+/llm-status
+
+# compiled output
+dist
+tmp
+out-tsc
+
+# NX / Node
+node_modules/
+dist/
+.nx/cache/
+
+# Backend build
+backend/target/
+
+# Database — this is the user's data, never commit it
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Misc
+*.env.local
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs
+.claude/worktrees
+.claude/settings.local.json
+
+.angular
+
+__screenshots__/
+
+vitest.config.*.timestamp*
+.aider*
