@@ -3,6 +3,7 @@ type: source
 created: 2026-10-19
 updated: 2026-10-19
 origin: sync-handoff.md
+retired: 2026-10-19
 sources: []
 tags: [design-system, sync, history, tooling]
 ---
@@ -10,8 +11,9 @@ tags: [design-system, sync, history, tooling]
 # Design-system sync handoff (2026-10-05)
 
 This is a handoff written on 2026-10-05, when the first design-system sync from this repo was blocked. It lists
-what went wrong on the way, the sync decisions to carry over, and the steps to resume. It lives at the repo root as
-[`sync-handoff.md`](../../sync-handoff.md). Snapshot: `raw/sessions/sync-handoff.md`. Its procedure section copies
+what went wrong on the way, the sync decisions to carry over, and the steps to resume. It was committed at the repo root in
+`a90b779` and retired on 2026-10-19: read it with `git show a90b779:sync-handoff.md`. Snapshot:
+`raw/sessions/sync-handoff.md`. Its procedure section copies
 the [`sync-design-system` skill](../../.claude/skills/sync-design-system/SKILL.md), so that part isn't summarised
 here.
 
@@ -57,3 +59,10 @@ here.
   [Plain-CSS distribution](../decisions/plain-css-distribution.md) (the leftover `TAILWIND_ENTRY`), and the
   [Overview](../overview.md) (timeline, open questions)
 - Outside the wiki: a gotcha in the root `CLAUDE.md` about the Artifact tool and the backend
+- **Retired 2026-10-19.** Nothing in it was left uncovered:
+  - the procedure is the [`sync-design-system` skill](../../.claude/skills/sync-design-system/SKILL.md);
+  - the rules are the [decision page](../decisions/repo-is-sync-source-of-truth.md);
+  - the commit requirement is in the [sync tool's README](../../tools/design-system-sync/README.md).
+
+  The details that were dropped (the error messages from the broken extraction, the test counts at handoff) stay in
+  git and in the snapshot.

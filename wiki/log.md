@@ -30,3 +30,7 @@ pages: sources/ngx-paper-ui-extraction.md, overview.md, index.md, CLAUDE.md (log
 ## [2026-10-19] retire | Entry points: why split, and what Angular does
 source: entry-points.md
 pages: sources/entry-points.md, index.md; nothing moved outside the wiki (the leftovers were dropped)
+
+## [2026-10-19] retire | Design-system sync handoff (2026-10-05)
+source: sync-handoff.md
+pages: sources/sync-handoff.md, index.md; nothing moved outside the wiki (the leftovers were dropped)
