@@ -55,6 +55,27 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
+        },
+        "package": {
+          "tsConfig": "apps/ui-demo-app/tsconfig.app.package.json",
+          "assets": [
+            {
+              "glob": "**/*",
+              "input": "apps/ui-demo-app/public"
+            },
+            {
+              "glob": "icons.svg",
+              "input": "node_modules/ngx-paper-ui/assets",
+              "output": "assets/ui"
+            }
+          ],
+          "styles": [
+            "node_modules/ngx-paper-ui/paper-ui.css",
+            "apps/ui-demo-app/src/docs.css"
+          ],
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
         }
       }
     },
@@ -68,6 +89,9 @@
         },
         "development": {
           "buildTarget": "ui-demo-app:build:development"
+        },
+        "package": {
+          "buildTarget": "ui-demo-app:build:package"
         }
       }
     },

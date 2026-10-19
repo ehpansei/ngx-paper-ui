@@ -65,6 +65,8 @@ The `# Title` comes right after the frontmatter. Templates by type:
 
 - **source**: a line saying what it is (kind, date, raw path), then **Key takeaways**, then **What it changed in the
   wiki** (links to the pages it created or updated). Add `origin:` to the frontmatter, set to the repo path or URL.
+  When the source is retired (deleted from the repo, see `log.md` below), add `retired:` with the date, and replace
+  the link to the repo file with the last commit that had it: "read it with `git show <sha>:<path>`".
 - **concept**: what it is, how it plays out in this repo (with links to the code and READMEs), the trade-offs, and
   related pages.
 - **decision**: **Context**, **Decision**, **Why**, **Rejected alternatives**, **Consequences**. Add `date:` (when
@@ -109,9 +111,10 @@ saying when it changed.
   pages: sources/entry-points.md (new), concepts/entry-points.md (new), index.md, overview.md
   ```
 
-  The kinds are `ingest`, `query` (only for a filed answer) and `lint`. The `source:` line holds the repo-relative
-  path or the URL, exactly as written. The startup hook and `/wiki status` match it with `grep -F` to decide what's
-  already ingested.
+  The kinds are `ingest`, `query` (only for a filed answer), `retire` and `lint`. A `retire` entry records a source
+  deleted from the repo once everything in it lives somewhere else (the wiki, a `CLAUDE.md`, a README or a skill);
+  its `source:` line repeats the ingest's. The `source:` line holds the repo-relative path or the URL, exactly as
+  written. The startup hook and `/wiki status` match it with `grep -F` to decide what's already ingested.
 
 ## Public content
 

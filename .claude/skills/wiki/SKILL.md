@@ -1,6 +1,6 @@
 ---
 name: wiki
-description: Maintain the ngx-paper-ui wiki in wiki/ (decisions, history, research, cross-cutting synthesis). Use when the user runs /wiki (status, ingest, query, lint), asks to ingest, clip or file something into the wiki, asks a question about the project's history or past decisions, or asks to lint or health-check the wiki.
+description: Maintain the ngx-paper-ui wiki in wiki/ (decisions, history, research, cross-cutting synthesis). Use when the user runs /wiki (status, ingest, query, retire, lint), asks to ingest, clip or file something into the wiki, asks to retire or remove an ingested session record or root doc, asks a question about the project's history or past decisions, or asks to lint or health-check the wiki.
 ---
 
 # Maintain the wiki
@@ -11,8 +11,8 @@ public-content rules. Run every command from the repo root.
 The user reads the wiki, and Claude writes it. The user chooses the sources and steers what gets emphasised.
 Claude does the summarising, the cross-linking and the bookkeeping.
 
-`/wiki` takes an operation: `status`, `ingest <path|url>`, `query <question>` or `lint`. With no argument, run
-`status`.
+`/wiki` takes an operation: `status`, `ingest <path|url>`, `query <question>`, `retire <path>` or `lint`. With no
+argument, run `status`.
 
 ## status
 
@@ -24,7 +24,7 @@ Report these four things. Keep it short:
 
 2. **Changed since ingest:** an ingested record whose snapshot differs from the file
    (`cmp -s "$f" "wiki/raw/sessions/$f"`). If the snapshot is missing, for example after a fresh clone, say so
-   instead of reporting a change.
+   instead of reporting a change. Skip records with a `retire` entry in `log.md`: their file is gone on purpose.
 3. **Clippings waiting:** files in `wiki/raw/external/` with no `source:` line for their URL or path.
 4. **Ingests since the last lint:** count the `ingest` headings after the last `lint` heading in `log.md`. At 5 or
    more, suggest `/wiki lint`.
@@ -69,6 +69,30 @@ This covers `/wiki query …` and plain questions about the project's history, p
 3. If the answer is substantial (a comparison, an analysis, a connection between pages), offer in one line to file
    it, for example: "File this as `comparisons/<slug>.md`?" If the user agrees, write the page, link it from a
    related page and `index.md`, and append a `query` entry to `log.md`. Don't file anything without asking.
+
+## retire
+
+This deletes an ingested repo file (a root doc or a session record) once nothing in it is left uncovered. Retire one
+source per run, like ingests.
+
+1. **Check it was ingested:** `grep -F "source: <path>" wiki/log.md` finds an `ingest` entry, and its snapshot
+   exists at `wiki/raw/sessions/<path>`. If either is missing, stop: ingest it first.
+2. **Find the leftovers.** Read the whole source, then its source page and the pages it touched, both `CLAUDE.md`
+   files, the READMEs and the skills it relates to. List what in it exists nowhere else. Skip what's obsolete
+   (superseded by the code or a later source).
+3. **Stop and present the leftovers** to the user, each with a proposed home (a wiki page, a `CLAUDE.md`, a README, a
+   skill, or drop), then wait for their reply. What's dropped stays in git and in the snapshot.
+4. **Write**, following the user's steer:
+   - the leftovers, in their homes;
+   - the source page: `retired:` and `updated:` in the frontmatter, the repo link replaced by the last commit that had
+     the file (`git log -1 --format=%h -- <path>`, read with `git show <sha>:<path>`), and the retirement under
+     **What it changed in the wiki** (where each leftover went);
+   - every other link to the file: `grep -rn "<path>" wiki --exclude-dir=raw`;
+   - `index.md`: append "; retired <date>" to the source's line.
+5. **Delete** the file with `git rm <path>`, and append one `retire` entry to `log.md`, with the same `source:` line as
+   the ingest and the pages touched (name changes outside the wiki too).
+6. **Check** with `check-links.sh` and the public-content grep from ingest step 5. Both must come back clean. Report
+   in one or two lines.
 
 ## lint
 

@@ -65,4 +65,5 @@ The extraction was more than a copy. It made the library publishable: a
   
   See the [session overview](sources/2026-10-05-0221-session.md).
 - **Not shipped yet:** as of 2026-10-19 there's no git remote and no npm release. The extraction plan's
-  local-registry install proof hasn't been confirmed by any source yet.
+  local-registry install proof is now the [`/install-test` skill](../.claude/skills/install-test/SKILL.md), and no
+  source has recorded a run yet.

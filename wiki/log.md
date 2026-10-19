@@ -22,3 +22,7 @@ pages: sources/sync-handoff.md (new), decisions/repo-is-sync-source-of-truth.md 
 ## [2026-10-19] ingest | Session overview: the repair session (2026-10-05 02:21)
 source: llm-status/2026-10-05-0221.md
 pages: sources/2026-10-05-0221-session.md (new), decisions/repo-is-sync-source-of-truth.md, overview.md, index.md
+
+## [2026-10-19] retire | Extraction plan: Paper UI out of vault, onto npm
+source: ngx-paper-ui-extraction.md
+pages: sources/ngx-paper-ui-extraction.md, overview.md, index.md, CLAUDE.md (log kind `retire`, retired source pages); outside the wiki: .claude/skills/install-test/ (new, from §4), the docs app's `package` configuration, root CLAUDE.md (Artifact `read` gotcha, `/install-test`), the wiki skill's `retire` operation

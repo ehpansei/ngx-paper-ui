@@ -17,7 +17,7 @@ styles, tokens, theming, icons, visual and content rules, adding a component) ar
 |---|---|---|
 | `ui` | `libs/ui` | The library. Source alias and package name: `ngx-paper-ui`. Its `package.json` is what gets published. |
 | `ui-demo-app` | `apps/ui-demo-app` | The docs site: a `lib-main-view` shell, one lazy route per component (`lib-<kebab>`) |
-| `ui-demo-app-e2e` | `apps/ui-demo-app-e2e` | Playwright suite (25 tests) against the docs site on `:4200` |
+| `ui-demo-app-e2e` | `apps/ui-demo-app-e2e` | Playwright suite (27 tests) against the docs site on `:4200` |
 | `design-system-sync` | `tools/design-system-sync` | Plain Node ESM tool behind `/sync-design-system` |
 | `ngx-paper-ui-workspace` | `/` (root `project.json`) | The `local-registry` target (Verdaccio on `:4873`, config in `.verdaccio/`) |
 
@@ -49,7 +49,9 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
   `LICENSE` is the same text, for the repository.
 - Checks before a release: `npx publint dist/libs/ui` and
   `npx @arethetypeswrong/cli --pack dist/libs/ui --exclude-entrypoints ./paper-ui.css --ignore-rules cjs-resolves-to-esm`.
-  The two exclusions are expected: CSS has no types, and Angular packages are ESM-only.
+  The two exclusions are expected: CSS has no types, and Angular packages are ESM-only. Then run **`/install-test`**,
+  which publishes to Verdaccio, installs the package into the docs app's `package` configuration (no alias, styles
+  and sprite from `node_modules`) and runs the e2e suite against it.
 - Releases: `nx release --skip-publish` (config in `nx.json`) builds `ui`, sets the version in
   `libs/ui/package.json` and `dist/libs/ui/package.json`, writes `libs/ui/CHANGELOG.md` from Conventional Commits,
   then commits and tags `v{version}`. Push the commit and the tag; `release.yml` publishes that tag to npm with
@@ -91,7 +93,7 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
   regex as `\x3C`; keep that.
 - **Artifact tool:** publishing refuses `.ts` files unless they're sent as `{ from, contentType: "text/plain" }`.
   Build the `files` map with `node tools/design-system-sync/cli.mjs files-arg`, never by hand. Asset reads by id
-  take `path: "<id>"`, one per call.
+  take `path: "<id>"`, one per call. A `read` with `path` doesn't accept a `prompt`.
 - **Syncs need a claude.ai session on Anthropic's backend.** The Artifact tool, and so any design-system read or
   publish, refuses every call in a session routed to another model provider through environment variables, and
   `/login` alone doesn't fix that. Start `claude` from a shell without those overrides, then `/login` with the
@@ -107,12 +109,14 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
 Skills live in `.claude/skills/<name>/SKILL.md`, with `name` + `description` frontmatter; flat `.md` files there
 aren't loaded. This repo has:
 - `sync-design-system`
+- `install-test`, which tests the built package as a consumer gets it (Verdaccio → the docs app's `package`
+  configuration → the e2e suite)
 - `write-plan`, which writes to `/plans`
 - `session-overview`, which writes `llm-status/YYYY-MM-DD-HHMM.md`
 - `session-resume`, which briefs you from the newest overview
 - `grill-me`, which interviews the user in rounds of `AskUserQuestion` prompts, each with a recommended answer, until every
   decision in a new request is settled. It is triggered by the UserPromptSubmit hook below
-- `wiki`, which maintains `wiki/` with `/wiki status | ingest <path|url> | query <question> | lint`
+- `wiki`, which maintains `wiki/` with `/wiki status | ingest <path|url> | query <question> | retire <path> | lint`
 
 `/plans` and `/llm-status` are gitignored.
 
