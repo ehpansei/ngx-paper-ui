@@ -26,3 +26,7 @@ pages: sources/2026-10-05-0221-session.md (new), decisions/repo-is-sync-source-o
 ## [2026-10-19] retire | Extraction plan: Paper UI out of vault, onto npm
 source: ngx-paper-ui-extraction.md
 pages: sources/ngx-paper-ui-extraction.md, overview.md, index.md, CLAUDE.md (log kind `retire`, retired source pages); outside the wiki: .claude/skills/install-test/ (new, from §4), the docs app's `package` configuration, root CLAUDE.md (Artifact `read` gotcha, `/install-test`), the wiki skill's `retire` operation
+
+## [2026-10-19] retire | Entry points: why split, and what Angular does
+source: entry-points.md
+pages: sources/entry-points.md, index.md; nothing moved outside the wiki (the leftovers were dropped)

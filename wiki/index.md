@@ -14,7 +14,7 @@ Every page in the wiki, one line each: `[Title](path) — summary (n sources)`. 
 ## Sources
 
 - [Extraction plan: Paper UI out of vault, onto npm](sources/ngx-paper-ui-extraction.md) — the plan that moved the library out of vault and made it publishable; how it held up; retired 2026-10-19
-- [Entry points: why split, and what Angular does](sources/entry-points.md) — the 2026-10-01 explainer on secondary entry points and tree-shaking
+- [Entry points: why split, and what Angular does](sources/entry-points.md) — the 2026-10-01 explainer on secondary entry points and tree-shaking; retired 2026-10-19
 - [Design-system sync handoff (2026-10-05)](sources/sync-handoff.md) — the incomplete extraction, the backend blocker, the sync rules; the sync then ran
 - [Session overview: the repair session (2026-10-05 02:21)](sources/2026-10-05-0221-session.md) — closing notes of the repair session; mostly overlaps the handoff
 

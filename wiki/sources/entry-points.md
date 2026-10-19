@@ -3,6 +3,7 @@ type: source
 created: 2026-10-19
 updated: 2026-10-19
 origin: entry-points.md
+retired: 2026-10-19
 sources: []
 tags: [packaging, tree-shaking, angular]
 ---
@@ -10,8 +11,8 @@ tags: [packaging, tree-shaking, angular]
 # Entry points: why split, and what Angular does
 
 This is an explainer written on 2026-10-01, while the question of splitting `ngx-paper-ui` into secondary entry
-points was being decided. It lives at the repo root as [`entry-points.md`](../../entry-points.md). Snapshot:
-`raw/sessions/entry-points.md`.
+points was being decided. It was committed at the repo root in `a90b779` and retired on 2026-10-19: read it with
+`git show a90b779:entry-points.md`. Snapshot: `raw/sessions/entry-points.md`.
 
 ## Key takeaways
 
@@ -36,3 +37,5 @@ points was being decided. It lives at the repo root as [`entry-points.md`](../..
 - New: [Entry points and tree-shaking](../concepts/entry-points-and-tree-shaking.md) (concept) and
   [Secondary entry points by docs group](../decisions/secondary-entry-points.md) (decision, deferred)
 - [Overview](../overview.md): the decisions list
+- **Retired 2026-10-19.** Nothing in it was left uncovered: the concept and decision pages carry it. Its LEGO
+  analogy and the Passwords example were dropped, and they stay in git and in the snapshot.
