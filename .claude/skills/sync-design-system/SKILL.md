@@ -14,7 +14,7 @@ The deterministic half is `tools/design-system-sync/cli.mjs`; you do the artifac
   A design-system edit to one of these is reported as `remote-edit`. Never overwrite it silently; the user
   chooses **adopt** (bring it into the repo; only `bundle.css` and `components/src/angular/*` can be adopted
   automatically) or **discard**. For a generated file, port the edit into the repo by hand, then discard.
-- **Two-way** (⇄), 3-way merged against the last agreed base in `libs/ui/design-system/`:
+- **Two-way** (⇄), 3-way merged against the last agreed base in `tools/design-system-sync/state/`:
   - `tokens.json` ⇄ `libs/ui/src/styles/tokens/tokens.json`, merged per token
   - `README.md` ⇄ `libs/ui/docs/brand-book.md`
   - `components/<Comp>/README.md` ⇄ the component's `README.md`
@@ -54,7 +54,7 @@ Change detection is by content against the base, never by dates:
      files, builds the live-preview bundle, and loads every preview headless. It must print "all mounted, no
      errors".
    - Then run `node tools/design-system-sync/cli.mjs diff`, adding `--first` only if
-     `libs/ui/design-system/sync-state.json` doesn't exist.
+     `tools/design-system-sync/state/sync-state.json` doesn't exist.
 4. **Show the user the plan.** Summarise PUSH / PULL / MERGE counts, and list every item that needs a decision
    with its diff from `dist/ds-sync/plan.json` (diffs read "design system → repo").
    - **Token conflicts:** show base / repo / design system per token and ask which to keep.
@@ -90,7 +90,7 @@ Change detection is by content against the base, never by dates:
       - If refused because of a newer version, redo from step 2 once; if refused again, stop and report.
 7. **Record:** `node tools/design-system-sync/cli.mjs record --version <version from the publish result>`.
    - Report what moved each way.
-   - Remind the user to commit, including `libs/ui/design-system/`. Never commit or push git yourself.
+   - Remind the user to commit, including `tools/design-system-sync/state/`. Never commit or push git yourself.
    - Offer to open the artifact (Artifact `open`).
 
 ## Verify

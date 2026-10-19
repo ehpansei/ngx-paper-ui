@@ -21,7 +21,7 @@ export const PAGES = r('apps/ui-demo-app/src/app/pages');
 export const SAMPLE_DATA = r('apps/ui-demo-app/src/app/docs/sample-data.ts');
 
 /** Committed sync state: last agreed hashes + base copies of the two-way files. */
-export const STATE_DIR = r('libs/ui/design-system');
+export const STATE_DIR = r('tools/design-system-sync/state');
 export const STATE_FILE = join(STATE_DIR, 'sync-state.json');
 export const BASE_DIR = join(STATE_DIR, 'base');
 

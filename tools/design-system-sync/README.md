@@ -37,8 +37,8 @@ Every design-system path is compared in three versions:
 
 - **L**: the repo, rendered as design-system files (`dist/ds-sync/local/`)
 - **R**: the design system as fetched (`dist/ds-sync/remote/`)
-- **B**: the last agreed state, committed in `libs/ui/design-system/` (`sync-state.json` hashes, and `base/` copies
-  of the two-way files)
+- **B**: the last agreed state, committed in `tools/design-system-sync/state/` (`sync-state.json` hashes, and
+  `base/` copies of the two-way files)
 
 | repo vs base | DS vs base | result |
 |---|---|---|
@@ -57,9 +57,9 @@ identical content. Hashes are normalized (`lib/fsutil.mjs` `canonical`), so thes
 ### Agreement is a commit
 
 After a publish succeeds, `record` turns the staged repo side into the new base: hashes for every file, plus copies of
-the two-way files. `libs/ui/design-system/` is committed with the code, so the next sync on any machine knows what
-both sides last agreed on. That's also why you **sync from one repo only**. Two repos syncing one artifact would each
-hold a different base, and each would see the other's pushes as design-system edits.
+the two-way files. `tools/design-system-sync/state/` is committed with the code, so the next sync on any machine
+knows what both sides last agreed on. That's also why you **sync from one repo only**. Two repos syncing one artifact
+would each hold a different base, and each would see the other's pushes as design-system edits.
 
 ## Ownership, and why
 
@@ -103,7 +103,7 @@ What an edit on the wrong side becomes:
 | `dist/ds-sync/decisions.json` | Claude | `{ "<path>": "remote" \| "local" \| "adopt" \| "discard" \| "remove" \| "keep", "tokens.json": { "<family>/<name>": "remote" \| "local" } }` |
 | `dist/ds-sync/out/project/…` + `publish.json` | `apply`, `index` | Exactly what still differs: `publish`, `uploads` (icons), `removals`; plus the new `design-system.json` |
 | `dist/ds-sync/uploads.json` | Claude | `{ "<name>.svg": "<blob id or /_blob/ url>" }` from the icon uploads, read by `index` |
-| `libs/ui/design-system/sync-state.json` + `base/` | `record` | The agreed state: version, commit, time, per-file hashes, icon blob ids, and copies of the two-way files |
+| `tools/design-system-sync/state/sync-state.json` + `base/` | `record` | The agreed state: version, commit, time, per-file hashes, icon blob ids, and copies of the two-way files |
 
 Commands (`node tools/design-system-sync/cli.mjs <cmd>`):
 
@@ -193,7 +193,7 @@ Commands (`node tools/design-system-sync/cli.mjs <cmd>`):
   republish; if it moved, refetch.
 - **`git rev-parse HEAD`.** `index` (for `lastChange.via`) and `record` (for `commit`) both stamp the current commit.
   A repo with zero commits can't sync until it has one.
-- **`--first`.** Only when `libs/ui/design-system/sync-state.json` doesn't exist. The design system as it is
+- **`--first`.** Only when `tools/design-system-sync/state/sync-state.json` doesn't exist. The design system as it is
   becomes the base; two-way files missing in the repo are pulled to seed it, and pulled prose is renamed `pu` →
   `lib`.
 - **Generated files can't be adopted.** A design-system edit to a preview, `index.d.ts` or `bundle.js` has no

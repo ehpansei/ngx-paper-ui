@@ -11,7 +11,7 @@
  *   index --by <name> --note <text>   write out/project/design-system.json (lastChange, icon records)
  *   files-arg             print the Artifact publish `files` map (content types included)
  *   check                 load every staged preview headless with the bundle; fail on errors or blank showcases
- *   record --version <v>  after a successful publish: store the agreed state in libs/ui/design-system/
+ *   record --version <v>  after a successful publish: store the agreed state in tools/design-system-sync/state/
  */
 import { execSync } from 'node:child_process';
 import { readdirSync } from 'node:fs';

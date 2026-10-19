@@ -15,8 +15,8 @@ tags: [design-system, sync, history]
 ## Context
 
 The Paper UI design-system artifact on claude.ai is kept in step with the library by a three-way sync. The last
-agreed state, which is the merge base, is committed in `libs/ui/design-system/` (`sync-state.json` plus `base/`).
-Until the extraction, vault ran the sync. Its state was copied here at design-system version `1790709100-b668`:
+agreed state, which is the merge base, is committed in `tools/design-system-sync/state/` (`sync-state.json` plus
+`base/`). Until the extraction, vault ran the sync. Its state was copied here at design-system version `1790709100-b668`:
 28 cards, all in sync.
 
 ## Decision

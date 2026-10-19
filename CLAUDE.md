@@ -66,8 +66,8 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
     the docs pages' `*.docs.ts`, a live `bundle.js`, and `index.d.ts`.
   - **Two-way:** `tokens.json` (merged per token), the brand book `libs/ui/docs/brand-book.md`, each component's
     `README.md`, and the icons.
-- The last agreed state is committed in `libs/ui/design-system/` (`sync-state.json` plus `base/`), and the path
-  contract lives in `tools/design-system-sync/lib/mapping.mjs`. The model behind the tool (three-way merge,
+- The last agreed state is committed in `tools/design-system-sync/state/` (`sync-state.json` plus `base/`), and
+  the path contract lives in `tools/design-system-sync/lib/mapping.mjs`. The model behind the tool (three-way merge,
   ownership, data flow, edge cases) is in [`tools/design-system-sync/README.md`](tools/design-system-sync/README.md).
 - **Sync only from this repo, never from vault.** Two repos syncing one artifact would each see the other's pushes
   as conflicting edits.
