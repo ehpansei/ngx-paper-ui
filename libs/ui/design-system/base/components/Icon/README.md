@@ -11,7 +11,7 @@ Stroke icon set: 24px grid, 1.75px stroke, drawn in `currentColor`.
 | `strokeWidth` | `number` | `1.75` | Keep the default |
 | `title` | `string` | — | Accessible name when the icon stands alone |
 
-Icons are drawn from one sprite with `<use href="…/icons.svg#<name>">`: no inline paths, no sanitizer bypass. Each icon is a file in `libs/ui/src/assets/icons/` (24px grid, 1.75 stroke, `currentColor`); add one and run `nx run ui:icons` to rebuild the sprite and `IconName`. Apps serve the sprite at `assets/ui/icons.svg`, or point `provideIconSprite(url)` at it (same origin).
+Icons are drawn from one sprite with `<use href="…/icons.svg#<name>">`: no inline paths, no sanitizer bypass. Each icon is a file in `libs/ui/src/assets/icons/` (24px grid, 1.75 stroke, `currentColor`); add one and run `nx run ui:icons` to rebuild the sprite and `IconName`. Apps provide the sprite in one of two ways. `provideInlineIconSprite()` puts it into the page once, and icons reference `#<name>`. Or serve the file at `assets/ui/icons.svg` (from `node_modules/ngx-paper-ui/assets/`), or point `provideIconSprite(url)` at it (same origin).
 
 ```html
 <lib-icon name="search" size="sm" />

@@ -1,5 +1,6 @@
 /*
- * Classification, apply and record. See .claude/skills/sync-design-system.md for the procedure.
+ * Classification, apply and record. See .claude/skills/sync-design-system/SKILL.md for the procedure and
+ * tools/design-system-sync/README.md for the model behind it.
  *
  * For each design-system path, with L = repo (staged), R = design system (fetched), B = last agreed base:
  *   owner 'both':  L==R → same · L==B → pull · R==B → push · no base, one side only → push/pull · else conflict

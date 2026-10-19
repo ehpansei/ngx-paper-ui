@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * Design-system sync — deterministic half. Claude drives it through .claude/skills/sync-design-system.md
+ * Design-system sync — deterministic half. Claude drives it through .claude/skills/sync-design-system/SKILL.md
  * (the Artifact reads/publishes happen there). Commands:
  *
  *   fetch-list            what to read from the design system into dist/ds-sync/remote (paths + icon blob ids)
@@ -135,11 +135,13 @@ switch (cmd) {
     break;
   case 'files-arg': {
     // The Artifact publish `files` map: every publish path, null for approved removals. Types the artifact
-    // server doesn't serve by extension (.ts sources) go as text/plain, as the design system stores them.
+    // server doesn't serve by extension (.ts sources) go as text/plain, as the design system stores them, and so
+    // do the component templates under components/src/ (.html), which are source, not pages.
     const out = JSON.parse(read(join(r('dist/ds-sync/out'), 'publish.json')));
     const SERVED = /\.(html|css|m?js|json|md|txt|svg|csv|xml|map|png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|pdf)$/;
+    const asText = (p) => !SERVED.test(p) || (p.startsWith('components/src/') && p.endsWith('.html'));
     const files = {};
-    for (const p of out.publish) files[`project/${p}`] = SERVED.test(p) ? `project/${p}` : { from: `project/${p}`, contentType: 'text/plain' };
+    for (const p of out.publish) files[`project/${p}`] = asText(p) ? { from: `project/${p}`, contentType: 'text/plain' } : `project/${p}`;
     for (const p of out.removals) files[`project/${p}`] = null;
     console.log(JSON.stringify(files));
     break;

@@ -7,7 +7,7 @@ Responsive app layout, mobile first: a header with menu, brand and avatar on mob
 | Name | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `detailOpen` | `boolean` | `false` | Shows the detail: a column on md+, the whole view on mobile |
-| `sidebarOpen` | `boolean` | `false` | Mobile drawer state; the ☰ button opens it |
+| `sidebarOpen` | `boolean` | `false` | Mobile drawer state; the ☰ button toggles it |
 
 **Inputs**
 

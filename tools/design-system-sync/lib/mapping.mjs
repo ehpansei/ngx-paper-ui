@@ -50,7 +50,9 @@ export function stageEntries() {
   add('components/bundle.css', joinCss(), 'repo', 'libs/ui/src/styles/paper-ui/*.css');
 
   // Sources (repo): the library, then the docs showcases + the mount entry.
-  for (const f of walk(LIB_SRC).filter((x) => x.endsWith('.ts') && !x.endsWith('.spec.ts') && x !== 'test-setup.ts'))
+  // Components keep their templates in .html files (templateUrl), so those ship beside the .ts.
+  const isSource = (x) => (x.endsWith('.ts') && !x.endsWith('.spec.ts') && x !== 'test-setup.ts') || x.endsWith('.html');
+  for (const f of walk(LIB_SRC).filter(isSource))
     add(`components/src/angular/${f}`, read(join(LIB_SRC, f)), 'repo', rel(join(LIB_SRC, f)));
   for (const doc of docs) {
     const f = join(PAGES, `${doc.kebab}-docs-page`, `${doc.kebab}-showcase.ts`);

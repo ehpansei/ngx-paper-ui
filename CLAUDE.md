@@ -32,7 +32,7 @@ npm run e2e                         # nx e2e ui-demo-app-e2e -- --project=chromi
 nx run ui:icons | ui:tokens | ui:styles   # regenerate generated sources (build runs all three)
 nx run-many -t lint test build -p ui ui-demo-app ui-demo-app-e2e design-system-sync
 nx run design-system-sync:check     # build the design-system bundle, load all 28 cards headless
-nx run ngx-paper-ui-workspace:local-registry   # Verdaccio, for install tests
+nx run ngx-paper-ui-workspace:local-registry   # Verdaccio on :4873, for install tests; storage (tmp/local-registry/storage) survives restarts
 npm run local-build-publish         # build ui and publish it to Verdaccio (must be running), replacing the same version
 ```
 
@@ -65,7 +65,8 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
   - **Two-way:** `tokens.json` (merged per token), the brand book `libs/ui/docs/brand-book.md`, each component's
     `README.md`, and the icons.
 - The last agreed state is committed in `libs/ui/design-system/` (`sync-state.json` plus `base/`), and the path
-  contract lives in `tools/design-system-sync/lib/mapping.mjs`.
+  contract lives in `tools/design-system-sync/lib/mapping.mjs`. The model behind the tool (three-way merge,
+  ownership, data flow, edge cases) is in [`tools/design-system-sync/README.md`](tools/design-system-sync/README.md).
 - **Sync only from this repo, never from vault.** Two repos syncing one artifact would each see the other's pushes
   as conflicting edits.
 - Recording a sync reads `git rev-parse HEAD`, so this folder must be a git repo before the first sync.
@@ -91,6 +92,10 @@ docs app uses `@angular/build:unit-test`, so run `nx test ui-demo-app --skip-nx-
 - **Artifact tool:** publishing refuses `.ts` files unless they're sent as `{ from, contentType: "text/plain" }`.
   Build the `files` map with `node tools/design-system-sync/cli.mjs files-arg`, never by hand. Asset reads by id
   take `path: "<id>"`, one per call.
+- **Syncs need a claude.ai session on Anthropic's backend.** The Artifact tool, and so any design-system read or
+  publish, refuses every call in a session routed to another model provider through environment variables, and
+  `/login` alone doesn't fix that. Start `claude` from a shell without those overrides, then `/login` with the
+  claude.ai account.
 - **Lint rules:**
   - Attribute components need an `eslint-disable-next-line @angular-eslint/component-selector` comment.
   - `elements-content` allows `label` for icon-only buttons.
@@ -107,13 +112,23 @@ aren't loaded. This repo has:
 - `session-resume`, which briefs you from the newest overview
 - `grill-me`, which interviews the user in rounds of `AskUserQuestion` prompts, each with a recommended answer, until every
   decision in a new request is settled. It is triggered by the UserPromptSubmit hook below
+- `wiki`, which maintains `wiki/` with `/wiki status | ingest <path|url> | query <question> | lint`
 
 `/plans` and `/llm-status` are gitignored.
+
+## Wiki
+
+`wiki/` is an Obsidian vault that Claude maintains. It holds what the code can't: decisions and why they were made,
+history, research, and synthesis that cuts across the repo. It grows one ingested source at a time, from session
+records (`llm-status/`, `plans/`, one-off root docs) and external articles. It links to the READMEs and `CLAUDE.md`
+files and never copies them. Its schema is [`wiki/CLAUDE.md`](wiki/CLAUDE.md). The pages are committed; `wiki/raw/`
+(the source snapshots) is gitignored.
 
 ## Session hooks (`.claude/settings.json`, scripts in `.claude/hooks/`)
 
 - **SessionStart** (`startup|clear`): `session-start.sh` puts the newest `llm-status/*.md` into the new session's
-  context.
+  context. When `wiki/log.md` exists, it also adds one line listing the session records that haven't been ingested
+  into the wiki yet.
 - **UserPromptSubmit**: `grill-reminder.sh` adds a reminder to run `grill-me` when a prompt is a new request. It
   stays silent for `/` commands, prompts that start with `no grill`, and the overview writer.
 - **SessionEnd**: `session-end.sh` condenses the closing session's transcript, runs `session-overview` on it in a

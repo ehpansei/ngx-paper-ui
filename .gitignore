@@ -4,6 +4,10 @@
 /docs
 /plans
 /llm-status
+# wiki/: pages are committed; raw sources and Obsidian workspace state stay local (app.json holds the link settings)
+/wiki/raw/
+/wiki/.obsidian/*
+!/wiki/.obsidian/app.json
 
 # compiled output
 dist
